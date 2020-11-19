@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<html>
+{% load static%}
+{% include 'head.html' %}
+
+    <header id="home" class="header-area">
+    <div class="navigation fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="/">
+                            <img src="{% static 'assets/images/banner/owoaff.png' %}" alt="Logo">
+                        </a> <!-- Logo -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active"><a class="page-scroll" href="/">Home</a></li>
+                                <!-- <li class="nav-item"><a class="page-scroll" href="#about">About</a></li> -->
+                                <!-- <li class="nav-item"><a class="page-scroll" href="#service">Services</a></li> -->
+                                <!-- <li class="nav-item"><a class="page-scroll" href="#work">Portfolio</a></li> -->
+                                <!-- <li class="nav-item"><a class="page-scroll" href="blog/">Blog</a></li> -->
+                                <!-- <li class="nav-item"><a class="page-scroll" href="/">Contact</a></li> -->
+                            </ul>
+                        </div> <!-- navbar collapse -->
+                    </nav> <!-- navbar -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </div> <!-- navigation -->
+    </header>
+
+    <section id="blog" class="blog-area pt-125 pb-130">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center pt-25 pb-25">
+                        <h2 class="title">From The Blog</h2>
+                        <p>Get to read more on how to make tremedious income. Increase your source of your profit and income</p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+           
+            <div class="row justify-content-center">
+                {% for blog in post %}
+                <div class="col-lg-4 col-md-8 col-sm-9">
+                    <div class="single-blog mt-30">
+                        <div class="blog-image">
+                            <img src="{{blog.thumbnail.url}}" alt="Blog">
+                        </div>
+                        <div class="blog-content">
+                            <h4 class="blog-title"><a href="{{blog.get_absolute_url}}">{{blog.title | title}}</a></h4>
+                            <span>{{blog.time}}</span>
+                        </div>
+                    </div> <!-- single blog -->
+                </div>
+                {% endfor %}
+            </div> <!-- row -->
+        </div> <!-- container -->
+        <hr>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-template d-flex justify-content-center">
+            {% if post.has_previous %}
+            <li class="page-item"><a href="?{{page_request_var}}={{post.previous_page_number}}" class="page-link"> < </a></li>
+            {% endif %}
+            <li class="page-item"><a href="?{{ page_request_var }}={{ post.number }}" class="page-link active">{{ post.number }}</a></li>
+            {% if post.has_next %}
+            <li class="page-item"><a href="?{{page_request_var}}={{post.next_page_number}}" class="page-link">></i></a></li>
+            {% endif %}
+          </ul>
+        </nav>
+    </section>
+   
+
+    <section id="call-to-action" class="call-to-action pt-125 pb-130 bg_cover" style="background-image: url({% static 'assets/images/call-to-action.jpg' %})">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="call-action-content text-center">
+                        <h2 class="action-title">Subscribe To Our NewsLetter</h2>
+                        <p>Get updated on the latest Post about Owodaily & affliate marketing. We Never Spam Your Email..... </p>
+                        <div class="call-action-form">
+                                {% csrf_token %}
+                                <form action="." method="POST">
+                                    {% csrf_token %}
+                                    <div class="single-form pb-20">
+                                        <input type="email" name="email" placeholder="Enter Your Email">
+                                    </div> <!-- single form -->
+                                    <div class="action-btn rounded-buttons">
+                                        <button type="submit" class="main-btn rounded-three">subscribe</button>
+                                    </div>
+                                </form>
+                        </div> <!-- call action form -->
+                        
+                    </div> <!-- call action content -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+    
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+{% include 'footer.html' %}
+{% include 'scripts.html' %}
+</html>
+

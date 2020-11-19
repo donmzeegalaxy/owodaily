@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<html>
+{% load static%}
+{% include 'head.html' %}
+
+    <header id="home" class="header-area">
+    <div class="navigation fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="/">
+                            <img src="{% static 'assets/images/banner/owoaff.png' %}" alt="Logo">
+                        </a> <!-- Logo -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active"><a class="page-scroll" href="/">Home</a></li>
+                                <!-- <li class="nav-item"><a class="page-scroll" href="#about">About</a></li> -->
+                                <!-- <li class="nav-item"><a class="page-scroll" href="#service">Services</a></li> -->
+                                <!-- <li class="nav-item"><a class="page-scroll" href="#work">Portfolio</a></li> -->
+                                <li class="nav-item"><a class="page-scroll" href="/blog">Blog</a></li>
+                                <!-- <li class="nav-item"><a class="page-scroll" href="/">Contact</a></li> -->
+                            </ul>
+                        </div> <!-- navbar collapse -->
+                    </nav> <!-- navbar -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </div> <!-- navigation -->
+    </header>
+    <style type="text/css">
+        .big{
+            
+            background-image: url({% static 'assets/images/divider_main.jpg' %});
+        }
+    </style>
+
+
+    <div class="container pt-150 pb-20 m-20px text-center"  >
+        <h1 class="big text-center">{{post.title | title}}</h2>
+    </div>
+  
+   
+   <div class="container pb-20">
+       
+        <p>{{post.content | safe }}</p>
+       
+    
+       <div class="action-btn rounded-buttons text-center">
+        <a href="http://chat.whatsapp.com/GWvx9SsFpCS7q2owkfjRzk" target="_blank" rel="noopener noreferrer"><button type="submit" class="main-btn rounded-three">Chat me up</button></a>
+        </div>
+       <hr>
+       <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+        {% if previous_post %}
+        <div class="action-btn rounded-buttons text-left">
+            <a href="/blog/{{previous_post.slug}}" target="_self" rel="noopener noreferrer"><button type="submit" class="main-btn rounded-three">Previous Post</button></a>
+        </div>
+        {%else%}
+            <div class="action-btn rounded-buttons text-left">
+            </div>
+        {%endif%}
+
+        {% if next_post %}  
+            <div class="action-btn rounded-buttons text-right">
+            <a href="/blog/{{next_post.slug}}" target="_self" rel="noopener noreferrer"><button type="submit" class="main-btn rounded-three">Next Post</button></a>
+        </div>
+        {%endif%}
+    </div>
+
+        
+   </div>
+   
+    <section id="call-to-action" class="call-to-action pt-125 pb-130 bg_cover" style="background-image: url({% static 'assets/images/call-to-action.jpg' %})">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="call-action-content text-center">
+                        <h2 class="action-title">Subscribe To Our NewsLetter</h2>
+                        <p>Get updated on the latest Post about Owodaily & affliate marketing. We Never Spam Your Email..... </p>
+                        <div class="call-action-form">
+                                {% csrf_token %}
+                                <form action="." method="POST">
+                                    {% csrf_token %}
+                                    <div class="single-form pb-20">
+                                        <input type="email" name="email" placeholder="Enter Your Email">
+                                    </div> <!-- single form -->
+                                    <div class="action-btn rounded-buttons">
+                                        <button type="submit" class="main-btn rounded-three">subscribe</button>
+                                    </div>
+                                </form>
+                        </div> <!-- call action form -->
+                        
+                    </div> <!-- call action content -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+    
+    
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+{% include 'footer.html' %}
+{% include 'scripts.html' %}
+</html>
